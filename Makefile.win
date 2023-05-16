@@ -1,0 +1,14 @@
+PRIV_DIR = $(MIX_APP_PATH)/priv
+NIF_SO = $(PRIV_DIR)/c_nif.dll
+
+C_SRC = $(MAKEDIR)/c_src
+LIB_SRC = $(MAKEDIR)/lib
+CPPFLAGS = /O2 /EHsc /I"$(ERTS_INCLUDE_DIR)"
+
+build: $(NIF_SO)
+
+$(NIF_SO):
+	@ if not exist "$(PRIV_DIR)" mkdir "$(PRIV_DIR)"
+	$(CC) $(CPPFLAGS) /LD /MD /Fe$@ $(C_SRC)/nif.c 
+
+.PHONY: all
