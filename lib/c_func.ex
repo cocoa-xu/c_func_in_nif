@@ -4,6 +4,10 @@ defmodule CFunc do
     CFunc.Nif.pointer_to_my_add()
   end
 
+  def pointer_to_my_op do
+    CFunc.Nif.pointer_to_my_op()
+  end
+
   def new_struct(mode, a, b) do
     CFunc.Nif.new_struct(mode, a, b)
   end

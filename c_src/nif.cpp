@@ -9,15 +9,29 @@
 #pragma GCC diagnostic ignored "-Wunused-function"
 #endif
 
-extern "C" int my_add(int a, int b) {
-    return a + b;
-}
-
 struct MyStruct {
     std::string mode;
     int a;
     int b;
 };
+
+extern "C" int my_add(int a, int b) {
+    return a + b;
+}
+
+extern "C" int my_op(struct MyStruct * s) {
+    if (s->mode == "add") {
+        return s->a + s->b;
+    } else if (s->mode == "subtract") {
+        return s->a - s->b;
+    } else if (s->mode == "multiply") {
+        return s->a * s->b;
+    } else if (s->mode == "divide") {
+        return s->a / s->b;
+    } else {
+        return 0;
+    }
+}
 
 ERL_NIF_TERM atom(ErlNifEnv *env, const char *msg) {
     ERL_NIF_TERM a;
@@ -60,6 +74,10 @@ ERL_NIF_TERM error(ErlNifEnv *env, const char *msg) {
 
 static ERL_NIF_TERM pointer_to_my_add(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[]) {
     return enif_make_uint64(env, (uint64_t)(uint64_t *)(&my_add));
+}
+
+static ERL_NIF_TERM pointer_to_my_op(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[]) {
+    return enif_make_uint64(env, (uint64_t)(uint64_t *)(&my_op));
 }
 
 static ERL_NIF_TERM new_struct(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[]) {
@@ -113,6 +131,7 @@ static int on_upgrade(ErlNifEnv *_sth0, void **_sth1, void **_sth2, ERL_NIF_TERM
 
 static ErlNifFunc nif_functions[] = {
     {"pointer_to_my_add", 0, pointer_to_my_add, 0},
+    {"pointer_to_my_op", 0, pointer_to_my_op, 0},
     {"new_struct", 3, new_struct, 0},
     {"free_struct", 1, free_struct, 0},
 };
