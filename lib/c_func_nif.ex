@@ -13,4 +13,6 @@ defmodule CFunc.Nif do
   end
 
   def pointer_to_my_add(), do: :erlang.nif_error(:not_loaded)
+  def new_struct(_mode, _a, _b), do: :erlang.nif_error(:not_loaded)
+  def free_struct(_ptr), do: :erlang.nif_error(:not_loaded)
 end

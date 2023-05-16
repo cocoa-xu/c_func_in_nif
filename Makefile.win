@@ -9,6 +9,6 @@ build: $(NIF_SO)
 
 $(NIF_SO):
 	@ if not exist "$(PRIV_DIR)" mkdir "$(PRIV_DIR)"
-	$(CC) $(CPPFLAGS) /LD /MD /Fe$@ $(C_SRC)/nif.c 
+	$(CC) $(CPPFLAGS) /LD /MD /Fe$@ $(C_SRC)/nif.cpp
 
 .PHONY: all
