@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string>
 #include <cstring>
+#include <string.h>
 
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Wunused-parameter"
