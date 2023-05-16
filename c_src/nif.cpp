@@ -1,6 +1,7 @@
 #include <erl_nif.h>
 #include <stdint.h>
 #include <string>
+#include <cstring>
 
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Wunused-parameter"
